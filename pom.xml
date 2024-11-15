@@ -1,0 +1,231 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>springmvc_m</groupId>
+  <artifactId>springmvc_m</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+  <properties>
+	<org.springframework-version>6.1.14</org.springframework-version>
+	<com.fasterxml.jackson.core>2.15.4</com.fasterxml.jackson.core>
+	
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	
+	<maven.compiler.target>17</maven.compiler.target>
+	<maven.compiler.source>17</maven.compiler.source>
+  </properties>
+  
+  <dependencies>
+	<!-- (Required) spring mvc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+	    <version>${org.springframework-version}</version>
+	</dependency>
+	
+	<!-- spring-context -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context</artifactId>
+	    <version>${org.springframework-version}</version>
+			<exclusions>
+				<!-- Exclude Commons Logging in favor of SLF4j -->
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+	</dependency>
+	
+	<!-- (Required) Servlet -->
+	<!-- Servlet (javax.servlet is Relocated to jakarta.servlet)-->
+	<dependency>
+	    <groupId>jakarta.servlet</groupId>
+	    <artifactId>jakarta.servlet-api</artifactId>
+	    <version>6.0.0</version>
+	    <scope>provided</scope>
+	</dependency>
+	<!-- JSP (javax.servlet is Relocated to jakarta.servlet) -->
+	<dependency>
+	    <groupId>jakarta.servlet.jsp</groupId>
+	    <artifactId>jakarta.servlet.jsp-api</artifactId>
+	    <version>4.0.0</version>
+	    <scope>provided</scope>
+	</dependency>
+	<!-- jstl (javax.servlet is Relocated to jakarta.servlet) -->
+	<dependency>
+	    <groupId>jakarta.servlet.jsp.jstl</groupId>
+	    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+	    <version>3.0.2</version>
+	</dependency>
+	
+	<!-- Spring AOP -->
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjrt</artifactId>
+	    <version>1.9.22.1</version>
+	    <scope>runtime</scope>
+	</dependency>
+
+	<!-- DB Connect -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>${org.springframework-version}</version>
+	</dependency>
+
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-dbcp2</artifactId>
+	    <version>2.10.0</version>
+	</dependency>
+
+	<dependency>
+	    <groupId>org.springframework.data</groupId>
+	    <artifactId>spring-data-jpa</artifactId>
+	    <version>3.2.11</version>
+	</dependency>
+
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-orm</artifactId>
+	    <version>6.1.14</version>
+	</dependency>
+
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-core</artifactId>
+	    <version>6.4.10.Final</version>
+	</dependency>
+
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-c3p0</artifactId>
+	    <version>6.4.10.Final</version>
+	</dependency>
+
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-validator</artifactId>
+	    <version>8.0.1.Final</version>
+	</dependency>
+	
+	<!-- MyBatis -->
+	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis</artifactId>
+	    <version>3.5.16</version>
+	</dependency>
+
+	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis-spring</artifactId>
+	    <version>3.0.4</version>
+	</dependency>
+	
+	<!-- taglibs -->
+	<dependency>
+	    <groupId>org.apache.taglibs</groupId>
+	    <artifactId>taglibs-standard-impl</artifactId>
+	    <version>1.2.5</version>
+	    <scope>runtime</scope>
+	</dependency>
+	
+	<!-- Logging -->
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-api</artifactId>
+	    <version>2.0.16</version>
+	</dependency>
+
+	<dependency>
+	    <groupId>ch.qos.logback</groupId>
+	    <artifactId>logback-core</artifactId>
+	    <version>1.4.14</version>
+	</dependency>
+
+	<dependency>
+	    <groupId>ch.qos.logback</groupId>
+	    <artifactId>logback-classic</artifactId>
+	    <version>1.4.14</version>
+<!--	//* logback scope : compile/runtime/test -->
+		<scope>compile</scope>
+	</dependency>
+
+	<!-- (Optional) Logging (Old Version) -->
+	<!-- 
+	//slf4j-api
+	//jcl-over-slf4j
+	//slf4j-log4j12
+	//log4j (exclusion: mail, jms, jmxtools, jmxri)
+	 -->
+	
+	<!-- (Optional) JSON -->
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-core</artifactId>
+	    <version>${com.fasterxml.jackson.core}</version>
+	</dependency>
+
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-annotations</artifactId>
+	    <version>${com.fasterxml.jackson.core}</version>
+	</dependency>
+
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>${com.fasterxml.jackson.core}</version>
+	</dependency>
+	
+	<!-- (Optional) Transction -->
+	<!-- //spring-tx -->
+
+	<!-- (Optional) Mapping XML -->
+	<!-- //spring-oxm -->
+	
+	<!-- (Optional) lombok -->
+	<!-- //lombok -->
+	
+	<!-- (Optional) @Inject -->
+	<!-- //javasx.inject -->
+		
+	<!-- (Optional) Connect mysql -->	  	
+	<!-- //mysql-connector-java -->
+
+	<!-- (Optional) Supports messages in multiple languages -->
+	<!-- //spring-messaging -->
+	
+	<!-- (Optional) WebSocket -->
+	<!-- //spring-websocket -->
+	
+	<!-- (Optional) JMS Message Communication -->
+	<!-- //spring-jms -->
+	
+	<!-- (Optional) Unit Test -->
+	<dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.13.1</version>
+	    <scope>test</scope>
+	</dependency>
+	
+  </dependencies>	
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <release>17</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
