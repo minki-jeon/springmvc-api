@@ -6,14 +6,17 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
+<%-- favicon.ico 404 (Not Found) --%>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
 <body>
 	${resultApi}
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type ="text/javascript" src="/js/comn/api.key.js"></scirpt>
 <script>
 
-const API_KEY = "INSERT_API_KEY";
+const API_KEY = __mapleKey__;
 // const characterName = "CHARACTER NAME";
 const urlString = "https://open.api.nexon.com/maplestory/v1/character/list";
 
@@ -27,8 +30,6 @@ const answer = fetch(urlString, {
   .catch(error => console.error(error))
 
 console.log(answer)
-
-
 
 </script>
 </html>
