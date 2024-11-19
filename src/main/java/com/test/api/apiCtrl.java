@@ -29,6 +29,8 @@ public class apiCtrl {
 	private String __mapleKey__;
 	@Value("${key.MAPLEM}")
 	private String __maplemKey__;
+	@Value("${key.PUBLIC.3038817}")
+	private String __publicKey1__;
 	
     @RequestMapping(value= {"/sampleMaple.do"})
     public ModelAndView sampleMaple(HttpServletRequest request,
@@ -94,7 +96,7 @@ public class apiCtrl {
     		String API_KEY = __maplemKey__;
 //          String characterName = URLEncoder.encode("CHARACTER NAME", StandardCharsets.UTF_8);
 //          String urlString = "https://open.api.nexon.com/heroes/v1/id?character_name=" + characterName;
-    		String ocid = "9aa8425eb305ff231a632c6507ab63ccc583003eb0448898768cf5ad982a332b";
+    		String ocid = "9aa8425eb305ff231a632c6507ab63ccc583003eb0448898768cf5ad982a332b";	/* 캐릭터 고유ID */
     		String urlString = "https://open.api.nexon.com/maplestorym/v1/character/basic" + "?ocid=" + ocid;
             URL url = new URL(urlString);
       
@@ -111,6 +113,67 @@ public class apiCtrl {
               in = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
             }
       
+            String inputLine;
+            StringBuffer responseData = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+            	responseData.append(inputLine);
+            }
+            in.close();
+      
+            System.out.println(responseData.toString());
+            modelAndView.addObject("resultApi", responseData);
+            
+          } catch (Exception exception) {
+            System.out.println(exception);
+          }
+    	
+    	modelAndView.addObject("resultMap", resultMap);
+    	
+    	
+    	return modelAndView;
+    }
+
+
+    @RequestMapping(value= {"/samplePublicData.do"})
+    public ModelAndView samplePublicData(HttpServletRequest request,
+			HttpServletResponse response,
+			SessionStatus status,
+			ModelAndView modelAndView) {
+    	
+    	modelAndView.setViewName("api/samplePublicData");
+    	
+    	Map<String, Object> resultMap = new HashMap<String, Object>();
+
+    	try {
+    		String API_KEY = __publicKey1__;
+    		API_KEY = URLEncoder.encode(API_KEY, "UTF-8");
+    		Integer pageIdx = 1;
+    		Integer pageSize = 2;
+    		String returnType = "JSON";
+    		String uddi = "77d5f727-417a-4f07-a1de-bb342426bb38";
+    		String urlString = "https://api.odcloud.kr/api/3038817/v1/"
+    						+ "uddi:" + uddi + "?"
+    						+ "page=" + pageIdx + "&"
+    						+ "perPage=" + pageSize + "&"
+    						+ "returnType=" + returnType + "&"
+    						+ "serviceKey=" + API_KEY
+    						;
+    		
+            URL url = new URL(urlString);
+      
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            connection.setRequestMethod("GET");
+//          connection.setRequestProperty("Content-type", "application/json");
+      
+            int responseCode = connection.getResponseCode();
+      
+            BufferedReader in;
+            if(responseCode == 200) {
+              in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            } else {
+              in = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+            }
+
             String inputLine;
             StringBuffer responseData = new StringBuffer();
             while ((inputLine = in.readLine()) != null) {
