@@ -27,6 +27,8 @@ public class apiCtrl {
 	//* api.key.properties
 	@Value("${key.MAPLE}")
 	private String __mapleKey__;
+	@Value("${key.MAPLEM}")
+	private String __maplemKey__;
 	
     @RequestMapping(value= {"/sampleMaple.do"})
     public ModelAndView sampleMaple(HttpServletRequest request,
@@ -78,6 +80,57 @@ public class apiCtrl {
     	return modelAndView;
     }
 
+    @RequestMapping(value= {"/sampleMapleM.do"})
+    public ModelAndView sampleMapleM(HttpServletRequest request,
+			HttpServletResponse response,
+			SessionStatus status,
+			ModelAndView modelAndView) {
+    	
+    	modelAndView.setViewName("api/sampleMapleM");
+    	
+    	Map<String, Object> resultMap = new HashMap<String, Object>();
+
+    	try {
+    		String API_KEY = __maplemKey__;
+//          String characterName = URLEncoder.encode("CHARACTER NAME", StandardCharsets.UTF_8);
+//          String urlString = "https://open.api.nexon.com/heroes/v1/id?character_name=" + characterName;
+    		String ocid = "9aa8425eb305ff231a632c6507ab63ccc583003eb0448898768cf5ad982a332b";
+    		String urlString = "https://open.api.nexon.com/maplestorym/v1/character/basic" + "?ocid=" + ocid;
+            URL url = new URL(urlString);
+      
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("x-nxopen-api-key", API_KEY);
+      
+            int responseCode = connection.getResponseCode();
+      
+            BufferedReader in;
+            if(responseCode == 200) {
+              in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            } else {
+              in = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+            }
+      
+            String inputLine;
+            StringBuffer responseData = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+            	responseData.append(inputLine);
+            }
+            in.close();
+      
+            System.out.println(responseData.toString());
+            modelAndView.addObject("resultApi", responseData);
+            
+          } catch (Exception exception) {
+            System.out.println(exception);
+          }
+    	
+    	modelAndView.addObject("resultMap", resultMap);
+    	
+    	
+    	return modelAndView;
+    }
+    
     @RequestMapping(value= {"/index.do"})
     public ModelAndView main(HttpServletRequest request,
 			HttpServletResponse response,
