@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,10 @@ import jakarta.servlet.http.HttpServletResponse;
 @Controller
 public class apiCtrl {
 
+	//* api.key.properties
+	@Value("${key.MAPLE}")
+	private String __mapleKey__;
+	
     @RequestMapping(value= {"/sampleMaple.do"})
     public ModelAndView sampleMaple(HttpServletRequest request,
 			HttpServletResponse response,
@@ -34,7 +39,7 @@ public class apiCtrl {
     	Map<String, Object> resultMap = new HashMap<String, Object>();
 
     	try {
-            String API_KEY = "INSERT_API_KEY";
+    		String API_KEY = __mapleKey__;
 //          String characterName = URLEncoder.encode("CHARACTER NAME", StandardCharsets.UTF_8);
 //          String urlString = "https://open.api.nexon.com/heroes/v1/id?character_name=" + characterName;
             String urlString = "https://open.api.nexon.com/maplestory/v1/character/list";

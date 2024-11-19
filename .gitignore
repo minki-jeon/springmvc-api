@@ -2,6 +2,7 @@
 build/
 target/
 src/main/webapp/js/comn/api.key.js
+src/main/resources/properties/comn/api.key.properties
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,eclipse,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,eclipse,java

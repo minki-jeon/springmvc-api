@@ -7,6 +7,15 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
+	<!-- properties bean 추가 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	    <property name="locations">
+	        <list>
+	            <value>classpath:/properties/comn/api.key.properties</value>
+	        </list>
+	    </property>
+	</bean>
+
 	<!-- model에 대한 정보 -->
 	<context:component-scan base-package="com.base.mvc">
 	</context:component-scan>

@@ -13,9 +13,10 @@
 	${resultApi}
 </body>
 
-<script type ="text/javascript" src="/js/comn/api.key.js"></scirpt>
+<script type ="text/javascript" src="/js/comn/api.key.js"></script>
 <script>
 
+//* api.key.js
 const API_KEY = __mapleKey__;
 // const characterName = "CHARACTER NAME";
 const urlString = "https://open.api.nexon.com/maplestory/v1/character/list";

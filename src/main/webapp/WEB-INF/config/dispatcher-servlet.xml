@@ -16,6 +16,15 @@
 		<property name="prefix" value="/WEB-INF/jsp/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
+	
+	<!-- properties bean 추가 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	    <property name="locations">
+	        <list>
+	            <value>classpath:/properties/comn/api.key.properties</value>
+	        </list>
+	    </property>
+	</bean>
 
 	<!-- model에 대한 정보 -->
 	<context:component-scan base-package="com.base.mvc, com.test.api">
