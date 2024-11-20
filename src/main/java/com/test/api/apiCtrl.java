@@ -133,7 +133,6 @@ public class apiCtrl {
     	return modelAndView;
     }
 
-
     @RequestMapping(value= {"/samplePublicData.do"})
     public ModelAndView samplePublicData(HttpServletRequest request,
 			HttpServletResponse response,
@@ -157,6 +156,61 @@ public class apiCtrl {
     						+ "perPage=" + pageSize + "&"
     						+ "returnType=" + returnType + "&"
     						+ "serviceKey=" + API_KEY
+    						;
+    		
+            URL url = new URL(urlString);
+      
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            connection.setRequestMethod("GET");
+//          connection.setRequestProperty("Content-type", "application/json");
+      
+            int responseCode = connection.getResponseCode();
+      
+            BufferedReader in;
+            if(responseCode == 200) {
+              in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            } else {
+              in = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+            }
+
+            String inputLine;
+            StringBuffer responseData = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+            	responseData.append(inputLine);
+            }
+            in.close();
+      
+            System.out.println(responseData.toString());
+            modelAndView.addObject("resultApi", responseData);
+            
+          } catch (Exception exception) {
+            System.out.println(exception);
+          }
+    	
+    	modelAndView.addObject("resultMap", resultMap);
+    	
+    	
+    	return modelAndView;
+    }
+
+
+    @RequestMapping(value= {"/sampleLotto.do"})
+    public ModelAndView sampleLotto(HttpServletRequest request,
+			HttpServletResponse response,
+			SessionStatus status,
+			ModelAndView modelAndView) {
+    	
+    	modelAndView.setViewName("api/sampleLotto");
+    	
+    	Map<String, Object> resultMap = new HashMap<String, Object>();
+
+    	try {
+    		Integer drwNo = 1146;		/* 회차번호 */
+//    		Integer pageIdx = 1;
+//    		Integer pageSize = 2;
+//    		String returnType = "JSON";
+    		String urlString = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo="
+    						+ drwNo + "&"
     						;
     		
             URL url = new URL(urlString);
